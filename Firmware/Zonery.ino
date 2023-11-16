@@ -5,7 +5,8 @@
 #include <iostream>
 
 //Limitação do PWM (0 a 255)
-int maxPWM = 170;
+int maxPWM = 255;
+int normalPWM = 170;
 
 //Pinout dos canais PWM (Motores)
   //Motor 1 (Dianteira Esquerda)
@@ -266,6 +267,14 @@ void loop() {
   L2 = PS4.L2();
   R2 = PS4.R2();
   R1 = PS4.R1();
+
+  //BOOSTER PWM
+  if (R1 == 1)
+  {
+    maxPWM = 255;
+  } else {
+    maxPWM = normalPWM;
+  }
 
   //Identifica posições nulas nos Analógicos do controle (centro)
   if (AnalogLY >= -AnalogMin && AnalogLY <= AnalogMin){
